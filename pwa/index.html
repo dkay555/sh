@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600&family=Nunito+Sans&display=swap" rel="stylesheet">
+  <title>babixGO Manager</title>
+</head>
+<body>
+  <header>
+    <h1>babixGO Manager</h1>
+    <nav id="tabs">
+      <button data-tab="kunden" class="active">Kunden</button>
+      <button data-tab="produkte">Produkte</button>
+      <button data-tab="eigene_accounts">Eigene Accounts</button>
+      <button data-tab="kunden_accounts">Kunden-Accounts</button>
+    </nav>
+  </header>
+  <main>
+    <section id="kunden" class="tab active"></section>
+    <section id="produkte" class="tab"></section>
+    <section id="eigene_accounts" class="tab"></section>
+    <section id="kunden_accounts" class="tab"></section>
+  </main>
+  <div id="modal" class="modal hidden">
+    <div class="modal-content">
+      <h2 id="modal-title"></h2>
+      <form id="modal-form"></form>
+      <button id="save-btn" class="primary">Speichern</button>
+      <button id="cancel-btn" class="secondary">Abbrechen</button>
+    </div>
+  </div>
+  <footer>
+    <button id="add-btn">Neu</button>
+    <button id="backup-btn">Backup</button>
+  </footer>
+  <script src="app.js"></script>
+</body>
+</html>
