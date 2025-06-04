@@ -1,0 +1,9 @@
+{
+  "name": "babixGO Manager",
+  "short_name": "babixGO",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f9f9f9",
+  "theme_color": "#00CFFF",
+  "icons": []
+}
