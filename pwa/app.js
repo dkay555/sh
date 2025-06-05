@@ -1,9 +1,10 @@
-const datasets=['kunden','produkte','eigene_accounts','kunden_accounts'];
+const datasets=['kunden','produkte','eigene_accounts','kunden_accounts','bestellungen'];
 const fields={
   kunden:['id','name','email'],
   produkte:['id','title','price'],
   eigene_accounts:['id','game','username'],
-  kunden_accounts:['id','customerId','gameAccountId']
+  kunden_accounts:['id','customerId','gameAccountId'],
+  bestellungen:['id','customerId','productId','anzahl']
 };
 let data={};
 
@@ -23,6 +24,7 @@ async function loadData(){
 
 function renderAll(){
   datasets.forEach(renderTab);
+  renderStats();
 }
 
 function renderTab(ds){
@@ -52,6 +54,7 @@ function delItem(ds,id){
   data[ds]=data[ds].filter(i=>i.id!==id);
   localStorage.setItem(ds,JSON.stringify(data[ds]));
   renderTab(ds);
+  renderStats();
 }
 
 const modal=document.getElementById('modal');
@@ -95,6 +98,7 @@ document.getElementById('save-btn').onclick=()=>{
   localStorage.setItem(currentDs,JSON.stringify(data[currentDs]));
   closeModal();
   renderTab(currentDs);
+  renderStats();
 };
 
 document.getElementById('backup-btn').onclick=()=>{
@@ -105,12 +109,27 @@ document.getElementById('backup-btn').onclick=()=>{
   a.click();
 };
 
+function renderStats(){
+  const container=document.getElementById('stats');
+  if(!container) return;
+  container.innerHTML='';
+  datasets.forEach(ds=>{
+    const p=document.createElement('p');
+    p.textContent=ds+': '+data[ds].length;
+    container.appendChild(p);
+  });
+}
+
 document.getElementById('tabs').addEventListener('click',e=>{
   if(e.target.tagName==='BUTTON'){
     document.querySelectorAll('nav#tabs button').forEach(b=>b.classList.remove('active'));
     e.target.classList.add('active');
-    datasets.forEach(ds=>document.getElementById(ds).classList.remove('active'));
-    document.getElementById(e.target.dataset.tab).classList.add('active');
+    [...datasets,'stats'].forEach(ds=>{
+      const sec=document.getElementById(ds);
+      if(sec) sec.classList.remove('active');
+    });
+    const target=document.getElementById(e.target.dataset.tab);
+    if(target) target.classList.add('active');
   }
 });
 
